@@ -2,10 +2,25 @@ $(document).ready(function()
 {
 var displayedButtons = ["Black Panther","The Godfather","Lady Bird","Mad Max","Taxi Driver"];
 
+function renderButtons(){ 
+
+    $("#display-buttons").empty();
+
+    for (var i = 0; i < displayedButtons.length; i++){
+
+        var newButton = $("<button>") 
+        newButton.attr("class", "btn btn-default");
+        newButton.attr("id", "input")  
+        newButton.attr("data-name", displayedButtons[i]); 
+        newButton.text(displayedButtons[i]); 
+        $("#display-buttons").append(newButton); 
+    }
+}
+
 function displayImg(){
 
     $("#display-images").empty();
-    var input = $(this).attr("data-name");
+    // var input = $(this).attr("data-name");
     var limit = 10;
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + input +"&limit=" + limit +"&api_key=E6AZTrHxFlt03Z8GSjKRsHxhcPD9i6Zq";   
 
@@ -13,9 +28,9 @@ function displayImg(){
         url: queryURL, 
         method: "GET"
     }).done(function(response) {
-
+        
         for(var j = 0; j < limit; j++) {    
-
+            console.log(response);
             var displayDiv = $("<div>");
             displayDiv.addClass("holder");
         
@@ -37,20 +52,6 @@ function displayImg(){
     });
 }
 
-function renderButtons(){ 
-
-    $("#display-buttons").empty();
-
-    for (var i = 0; i < displayedButtons.length; i++){
-
-        var newButton = $("<button>") 
-        newButton.attr("class", "btn btn-default");
-        newButton.attr("id", "input")  
-        newButton.attr("data-name", displayedButtons[i]); 
-        newButton.text(displayedButtons[i]); 
-        $("#display-buttons").append(newButton); 
-    }
-}
 
 function imageChangeState() {          
 
